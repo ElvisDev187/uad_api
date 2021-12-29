@@ -8,6 +8,15 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
+//connection à la base de données
+mongoose.connect(process.env.DB_CONECTION,{})
+.then(function (){
+    console.log("connexion à la base de donnée établie")
+})
+.catch(e=>{
+    console.log("erreur de connexion :"+e )
+})
+
 // Import des routes
 const postesRout = require('./routes/PosteRout');
 
@@ -20,10 +29,10 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
 app.use('/api/poste', postesRout);
+app.use("/api/user",require("./routes/worker"));
 
 
-mongoose.connect(process.env.DB_CONECTION, ()=> console.log("connect to bd"))
 
 
-
+//lancement
 app.listen(3000, ()=> console.log("server Start"));
