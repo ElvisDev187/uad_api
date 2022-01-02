@@ -20,6 +20,7 @@ mongoose.connect(process.env.DB_CONECTION,{})
 
 // Import des routes
 const postesRout = require('./routes/PosteRout');
+app.use("/api/worker",require("./routes/worker"));
 
 
 
@@ -39,13 +40,8 @@ app.use(helmet());
 
 
 
+
 app.get('/', (req, res)=>{ res.status(200).json({message : "Bienvenu sur l'api UADGest"}) })
-
-
-mongoose.connect(process.env.DB_TEST, ()=> console.log("connect to bd"))
-
-
-
 
 //lancement
 app.listen(3000, ()=> console.log("server Start"));

@@ -2,6 +2,14 @@ const mongoose=require("mongoose");
 
 
 const workerSchema=new mongoose.Schema({
+    id_worker :{
+        type: String,
+        required: true
+    },
+    id_poste :{
+        type: String,
+        required: true
+    },
     nom:{
         type:String,
         required:true,
