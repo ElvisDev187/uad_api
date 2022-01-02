@@ -1,13 +1,10 @@
 
-const {MiddlePoste} = require('../middlewares/PosteMiddleware');
 const controller = require('../controllers/PosteController');
 
 
 module.exports = function(app) {
-    //creer un poste
-    app.post('/poste/register',
-    [MiddlePoste.validate, MiddlePoste.ifExist],
-    controller.create 
+    //creer un poste je dois ajouter if exist ici
+    app.post('/poste/register', controller.create 
     );
 
 
@@ -20,7 +17,7 @@ app.get('/poste/:postId', controller.getById);
 app.delete('/poste/:postId', controller.delete);
 
 
-app.patch('/poste/:postId', [MiddlePoste.validate], controller.update )
+app.patch('/poste/:postId', controller.update )
 
 app.get('/poste', controller.getAll);
 }

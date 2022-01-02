@@ -2,6 +2,11 @@ const {MODELS} = require('../models/index')
 const Poste = MODELS.poste
 
 exports.create = (req, res)=>{
+
+      // validation
+      const {error} =  posteValidation(req.body);
+      if(error) return res.status(400).send(error.details[0].message);
+
     const poste = new Poste({
         id_poste: req.body.id_poste,
         nom_poste: req.body.nom_poste,
@@ -16,7 +21,8 @@ exports.create = (req, res)=>{
 };
 
 exports.getAll = (req, res)=>{
-    console.log('getAll : ',req.params);
+    console.log(req.route);
+    
      Poste.find().then((result)=>{
           res.status(200).json({data: result});
      }).catch((err)=>{
@@ -58,6 +64,12 @@ exports.delete = (req, res)=>{
 }
 
 exports.update = (req, res)=>{
+
+      // validation
+      console.log(req.body);
+      const {error} =  posteValidation(req.body);
+      if(error) return res.status(400).send(error.details[0].message);
+      
     const poste = new Poste({
                 id_poste: req.body.id,
                 nom_poste: req.body.name,

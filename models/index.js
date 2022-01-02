@@ -1,5 +1,5 @@
 const Poste = require('./Poste');
-
+const service = require('./service');
 
 
 
@@ -7,7 +7,8 @@ const Poste = require('./Poste');
 
 
 const MODELS = {
-    poste: Poste
+    poste: Poste,
+    Service: service
 }
 
 module.exports.MODELS = MODELS;
