@@ -10,9 +10,8 @@ const router = express.Router();
     
 router.post('/register', controller.create );
 
-//router.get('/:postName', controller.getByName);
 
-router.get('/:postId', controller.getById);
+router.post('/', controller.getSpecific);
 
 
 router.delete('/:postId', controller.delete);

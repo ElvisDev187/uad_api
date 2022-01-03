@@ -41,22 +41,11 @@ exports.getAll = (req, res) => {
     });
 };
 
-exports.getByName = (req, res) => {
-  console.log("getByname : ", req.params);
-  Poste.findOne({ nom_poste: req.params.postName })
-    .then((result) => {
-      res.status(200).json({ data: result });
-    })
-    .catch((err) => {
-      res
-        .status(400)
-        .json({ message: "Une erreur s'est produite", error: err });
-    });
-};
 
-exports.getById = async (req, res) => {
+
+exports.getSpecific = async (req, res) => {
   try {
-    const poste = await  Poste.findOne({ id_poste: req.params.postId })
+    const poste = await  Poste.find(req.body)
     res.status(200).json(poste);
   } catch (error) {
     res.status(400).json("un erreur est survenu"+ error.message);
