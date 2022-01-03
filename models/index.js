@@ -1,6 +1,7 @@
 const Poste = require('./Poste');
 const service = require('./service');
-const worker= require('./worker')
+const worker= require('./worker');
+const userLogin = require('./userLogin')
 
 
 
@@ -11,7 +12,8 @@ const worker= require('./worker')
 const MODELS = {
     poste: Poste,
     Service: service,
-    worker:worker
+    worker:worker,
+    userLogin: userLogin
 }
 
 module.exports.MODELS = MODELS;
