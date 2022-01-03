@@ -2,17 +2,15 @@ const {MODELS} = require('../models/index')
 const Poste = MODELS.poste
 
 exports.create = (req, res)=>{
+    console.log(res.locals.poste);
+    const poste = new Poste(res.locals.poste);
 
-      // validation
-      const {error} =  posteValidation(req.body);
-      if(error) return res.status(400).send(error.details[0].message);
+     
+    const err =  poste.validateSync();
+    // message d'erreur personaliser
+   // poste.invalidate('salaire', " le salaire doit etre superieur au smic 36776")
+    if(err) {return res.status(400).json(err.message) }
 
-    const poste = new Poste({
-        id_poste: req.body.id_poste,
-        nom_poste: req.body.nom_poste,
-        salaire: req.body.salaire,
-        grade: req.body.grade
-    });
          poste.save().then((result)=>{
             res.status(200).json({message : 'Poste créé avec success', result: result});
         }).catch((err)=>{
@@ -21,8 +19,10 @@ exports.create = (req, res)=>{
 };
 
 exports.getAll = (req, res)=>{
-    console.log(req.route);
-    
+    // console.log(req.route.path);
+    //  let post = (req.route.path.indexOf("poste")? true : false)
+    //  console.log(post);
+    // if(post){ console.log("ca concerne poste")};
      Poste.find().then((result)=>{
           res.status(200).json({data: result});
      }).catch((err)=>{
@@ -65,17 +65,8 @@ exports.delete = (req, res)=>{
 
 exports.update = (req, res)=>{
 
-      // validation
-      console.log(req.body);
-      const {error} =  posteValidation(req.body);
-      if(error) return res.status(400).send(error.details[0].message);
       
-    const poste = new Poste({
-                id_poste: req.body.id,
-                nom_poste: req.body.name,
-                salaire: req.body.salaire,
-                grade: req.body.grade
-            });
+    const poste = new Poste(res.locals.poste);
         
            
              Poste.updateOne({ id_poste: req.params.postId}, 
