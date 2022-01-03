@@ -10,7 +10,7 @@ const router = express.Router();
     
 router.post('/register', controller.create );
 
-router.get('/:postName', controller.getByName);
+//router.get('/:postName', controller.getByName);
 
 router.get('/:postId', controller.getById);
 
@@ -18,7 +18,7 @@ router.get('/:postId', controller.getById);
 router.delete('/:postId', controller.delete);
 
 
-router.patch('/:postId', controller.update);
+router.put('/:postId', controller.update);
 
 router.get('/', controller.getAll);
 

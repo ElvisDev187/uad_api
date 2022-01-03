@@ -55,7 +55,7 @@ exports.update =  async(req, res)=>{
         id_service: req.params.serviceId,
         libelle: req.body.libelle,
         description: req.body.description,
-        tarif_base:req.body.tarif
+        tarif_base:req.body.tarif_base
     });
     const err = uPoste.validateSync();
     if(err) return res.status(400).json(err.message);
@@ -64,7 +64,7 @@ exports.update =  async(req, res)=>{
     if(!exist) return res.status(400).json("Le service n'existe pas");
 
     try {
-        const result = await MODELS.Service.updateMany({id_service: req.params.serviceId}, {$set: uPoste});
+        const result = await MODELS.Service.updateMany({id_service: req.params.serviceId}, { $set: req.body }, {new: true});
         res.status(200).json("Service mis à jour");
     } catch (error) {
         res.status(400).json({ message: "Une errur est survenue", error: error.message })   

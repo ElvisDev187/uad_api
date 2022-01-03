@@ -54,16 +54,15 @@ exports.getByName = (req, res) => {
     });
 };
 
-exports.getById = (req, res) => {
-  Poste.findOne({ id_poste: req.params.postId })
-    .then((result) => {
-      res.status(200).json({ data: result });
-    })
-    .catch((err) => {
-      res
-        .status(400)
-        .json({ message: "Une erreur s'est produite", error: err });
-    });
+exports.getById = async (req, res) => {
+  try {
+    const poste = await  Poste.findOne({ id_poste: req.params.postId })
+    res.status(200).json(poste);
+  } catch (error) {
+    res.status(400).json("un erreur est survenu"+ error.message);
+  }
+  
+   
 };
 
 exports.delete =async (req, res) => {
@@ -94,14 +93,12 @@ exports.update =async (req, res) => {
   const postExist = await Poste.findOne({ id_poste: req.params.postId });
   if (!postExist) return res.status(400).json("Le poste n'existe pas");
 
-  Poste.updateOne({ id_poste: req.params.postId }, { $set: poste })
-    .then((result) => {
-      res.status(200).json({ message: "Poste mis a jour" });
-      
-    })
-    .catch((err) => {
-      res
-        .status(400)
-        .json({ message: "Une erreur s'est produite", error: err });
-    });
+
+  try {
+     const upd = await Poste.findOneAndUpdate({ id_poste: req.params.postId }, { $set: req.body }, {new: true})
+     res.json(upd);
+  } catch (error) {
+    res.json(error)
+  }
+   
 };
