@@ -9,15 +9,16 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 //connection à la base de données
-mongoose.connect(process.env.DB_TEST,{})
+mongoose.connect(process.env.DB_CONECTION,{})
 .then(function (){
     console.log("connexion à la base de donnée établie")
 })
 .catch(e=>{
-    console.log("erreur de connexion :"+e )
+    console.log("erreur de connexion :"+e + "on passe en local :" )
+    mongoose.connect(process.env.DB_TEST,{})
 });
 
-const workerRoute = require('./routes/worker')
+
 
 
 
@@ -32,8 +33,12 @@ app.use(cors());
 app.use(helmet());
 // Import des routes
  require('./routes/PosteRout')(app)
+
+ const workerRoute = require('./routes/worker')
  app.use('/api/worker', workerRoute)
 
+ const factureRoute = require('./routes/facture')
+ app.use('/api/facture', factureRoute)
 
 
 

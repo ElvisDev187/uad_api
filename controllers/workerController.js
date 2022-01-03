@@ -3,14 +3,13 @@ const workerModel= MODELS.worker
 const bcrypt=require("bcryptjs");
 const jwt=require("jsonwebtoken");
 
-exports.getAll=(req,res)=>{
-    workerModel.find()
-    .then(result=>{
+exports.getAll=async (req,res)=>{
+    try{
+        const result=await workerModel.find()
         res.send(result)
-    })
-    .then(e=>{
+    }catch{
         res.send(e)
-    })
+    }
 }
 
 exports.getSpecific=async (req,res)=>{
@@ -88,27 +87,32 @@ exports.login=async (req,res)=>{
 
 }
 exports.delete=async (req,res)=>{
-   await workerModel.deleteMany(req.body)
-   .then(()=>{
-   res.send("true")
-   })
-   .catch(e=>{
-   console.log(e)
-   res.status(400).send("erreur ,verifier votre connexion internet")
-   })
+   try{
+    const del=await workerModel.deleteMany(req.body)
+   res.status(200).json("true")
+   }catch{
+    console.log(e)
+    res.status(400).json("erreur ,verifier votre connexion internet")
+   }
+
+
 }
 
 exports.patch=async (req,res)=>{
+    const work=new workerModel(req.body)
+    const err = work.validateSync();
+    if(err) return res.status(400).json(err.message)
 
-     
-   const err = workerModel(req.body).validateSync();
-   if(err) return res.status(400).json(err.message)
 
-   const Exist = await workerModel.findOne({id_worker: req.body.matricule});
+   const Exist = await workerModel.findOne({id_worker: req.params.workerId});
    if(!Exist) return res.status(400).json('Le l\'employé n\'existe pas');
-
+   //on verifie si le mot de passe est là puis on le hash
+    if(req.body.mdp){
+        const salt= await bcrypt.genSalt(10);
+        req.body.mdp= await bcrypt.hash(req.body.mdp,salt);
+    }
     try {
-          await workerModel.updateOne({_id:req.params.workerId},{$set:req.body})
+          await workerModel.updateMany({id_worker:req.params.workerId},{$set:req.body})
           res.status(200).json({message: "mise à jour avec success"})
     } catch (error) {
         res.status(400).json({message: "erreur veuillez verifier votre connexion internet", error: error})

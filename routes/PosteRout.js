@@ -1,12 +1,12 @@
 
 const controller = require('../controllers/PosteController');
-const { ifExist } = require('../middlewares/Exist');
+
 
 
 
 module.exports = function(app) {
     //creer un poste je dois ajouter if exist ici
-    app.post('poste/register',[ifExist], controller.create 
+    app.post('poste/register', controller.create 
     );
 
 
@@ -19,7 +19,7 @@ app.get('/poste/:postId', controller.getById);
 app.delete('/poste/:postId', controller.delete);
 
 
-app.patch('/poste/:postId',[ifExist], controller.update )
+app.patch('/poste/:postId', controller.update )
 
 app.get('/poste', controller.getAll);
 }
