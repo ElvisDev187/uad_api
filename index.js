@@ -22,10 +22,8 @@ mongoose.connect(process.env.DB_TEST,{})
 const workerRoute = require('./routes/worker');
 const posteRoute = require('./routes/PosteRout');
 const serviceRoute = require('./routes/serviceRout');
-const factureRoute = require('./routes/facture')
-
-
-
+const factureRoute = require('./routes/facture');
+const customerRoute = require('./routes/customerRout');
 
 
 //set Midllewares
@@ -38,6 +36,7 @@ app.use('/api/poste', posteRoute);
 app.use('/api/worker', workerRoute);
 app.use('/api/service', serviceRoute);
 app.use('/api/facture', factureRoute);
+app.use('/api/customer', customerRoute);
 
 
 
