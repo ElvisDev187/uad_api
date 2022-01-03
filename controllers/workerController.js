@@ -88,7 +88,7 @@ exports.login=async (req,res)=>{
 
 }
 exports.delete=async (req,res)=>{
-   await workerModel.deleteMany(req.body)
+   await workerModel.deleteOne({id_worker: req.params.workerId})
    .then(()=>{
    res.send("true")
    })
