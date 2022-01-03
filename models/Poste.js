@@ -13,7 +13,8 @@ const postSchema = mongoose.Schema({
        },
        salaire:{
            type: Number,
-           required: true
+           required: true,
+           min: 36776
        },
        grade:{
            type: String,
