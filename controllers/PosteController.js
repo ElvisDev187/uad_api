@@ -66,8 +66,8 @@ exports.getById = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
-  Poste.deleteOne({ id_poste: req.params.postId })
+exports.delete =async (req, res) => {
+   await Poste.deleteOne({ id_poste: req.params.postId })
     .then((result) => {
       res.status(200).json({ message: "poste supprimer avec success" });
       console.log(result);
