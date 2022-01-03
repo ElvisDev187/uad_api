@@ -48,13 +48,11 @@ exports.register=async (req,res)=>{
 
        
         try{
-            console.log(worker)
             const savedUser=await worker.save();
             console.log("reussie")
-            console.log(worker)
             res.send(savedUser)
         }catch(e){
-            console.log(e)
+            console.log(e.message)
             res.status(400).send("erreur verifier votre connexion internet")
         }
 
@@ -113,9 +111,10 @@ exports.patch=async (req,res)=>{
     }
     try {
           await workerModel.updateMany({id_worker:req.params.workerId},{$set:req.body})
-          res.status(200).json({message: "mise à jour avec success"})
+         return res.status(200).json( "mise à jour avec success")
     } catch (error) {
-        res.status(400).json({message: "erreur veuillez verifier votre connexion internet", error: error})
+        console.log(error.message)
+        return res.status(400).json("erreur veuillez verifier votre connexion internet")
     }
 
     

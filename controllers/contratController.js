@@ -1,29 +1,32 @@
 const {MODELS}=require("../models/index")
-const factureModel=MODELS.facture
+const contratModel=MODELS.contrat
 exports.create=async (req,res)=>{
-    const facture=new factureModel({
+    const contrat=new contratModel({
+        id_contrat:req.body.id_contrat,
         id_facture:req.body.id_facture,
+        id_service:req.body.id_service,
         id_client:req.body.id_client,
-        id_worker:req.body.id_worker,
+        libelle:req.body.libelle,
+        montant:req.body.montant
     })
-    const err= facture.validateSync()
+    const err= contrat.validateSync()
     if(err) return res.status(400).json(err.message)
 
-    const Exist = await factureModel.findOne({id_facture: req.body.id_facture});
-    if(Exist) return res.status(400).json('La facture existe déjà');
+    const Exist = await contratModel.findOne({id_contrat: req.body.id_contrat});
+    if(Exist) return res.status(400).json('Le contrat existe déjà');
 
     try{
-        const newFacture= await factureModel.create(facture);
-        res.status(200).json(newFacture)
+        const newcontrat= await contratModel.create(contrat);
+        res.status(200).json(newcontrat)
     }catch(err){
-        console.log(err.message)
+        console.log(err)
         return res.status(400).json("problème de connexion")
     }
 }
 
 exports.getAll=async (req,res)=>{
         try{
-            const result=await factureModel.find()
+            const result=await contratModel.find()
             res.status(200).json(result)
 
         }catch(e){
@@ -33,7 +36,7 @@ exports.getAll=async (req,res)=>{
 }
 exports.getSpecific=async (req,res)=>{
     try{
-        const result=await factureModel.find(req.body)
+        const result=await contratModel.find(req.body)
         res.status(200).json(result)
     }catch(e){
         console.log(e.message)
@@ -42,10 +45,10 @@ exports.getSpecific=async (req,res)=>{
 }
 
 exports.delete=async (req,res)=>{
-    const facts=factureModel.find(req.body)
+    const facts=contratModel.find(req.body)
     if(!facts) return res.status(400).json("suppression impossible rien ne correspond")
     try{
-     const del=await factureModel.deleteMany(req.body)
+     const del=await contratModel.deleteMany(req.body)
     res.status(200).json("true")
     }catch(e){
      console.log(e.message)
@@ -53,6 +56,4 @@ exports.delete=async (req,res)=>{
     }
 
  }
- 
- 
  
