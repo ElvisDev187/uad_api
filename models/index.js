@@ -4,6 +4,7 @@ const worker= require('./worker');
 const userLogin = require('./userLogin');
 const facture=require('./facture');
 const customer = require('./customer');
+const payment = require('./payment');
 
 
 
@@ -17,7 +18,8 @@ const MODELS = {
     worker:worker,
     userLogin: userLogin,
     facture:facture,
-    customer: customer
+    customer: customer,
+    payment: payment
 }
 
 module.exports.MODELS = MODELS;
