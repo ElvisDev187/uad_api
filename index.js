@@ -15,12 +15,14 @@ mongoose.connect(process.env.DB_TEST,{})
 })
 .catch(e=>{
     console.log("erreur de connexion :"+e )
+    console.log("erreur de connexion :"+e + "on passe en local :" )
+    mongoose.connect(process.env.DB_TEST,{})
 });
 
 const workerRoute = require('./routes/worker');
 const posteRoute = require('./routes/PosteRout');
 const serviceRoute = require('./routes/serviceRout');
-
+const factureRoute = require('./routes/facture')
 
 
 
@@ -34,7 +36,8 @@ app.use(helmet());
 // Import des routes
 app.use('/api/poste', posteRoute);
 app.use('/api/worker', workerRoute);
-app.use('/api/service', serviceRoute)
+app.use('/api/service', serviceRoute);
+app.use('/api/facture', factureRoute);
 
 
 
