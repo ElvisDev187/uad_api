@@ -17,8 +17,9 @@ mongoose.connect(process.env.DB_TEST,{})
     console.log("erreur de connexion :"+e )
 });
 
-const workerRoute = require('./routes/worker')
-const posteRoute = require('./routes/PosteRout')
+const workerRoute = require('./routes/worker');
+const posteRoute = require('./routes/PosteRout');
+const serviceRoute = require('./routes/serviceRout');
 
 
 
@@ -31,8 +32,9 @@ app.use(cors());
 //app.use(header());
 app.use(helmet());
 // Import des routes
-app.use('./api/poste', posteRoute)
-app.use('/api/worker', workerRoute)
+app.use('/api/poste', posteRoute);
+app.use('/api/worker', workerRoute);
+app.use('/api/service', serviceRoute)
 
 
 

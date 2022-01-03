@@ -18,7 +18,7 @@ router.get('/:postId', controller.getById);
 router.delete('/:postId', controller.delete);
 
 
-router.patch('/:postId', controller.update )
+router.patch('/:postId', controller.update);
 
 router.get('/', controller.getAll);
 
