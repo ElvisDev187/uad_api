@@ -9,7 +9,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 //connection à la base de données
-mongoose.connect(process.env.DB_TEST,{})
+mongoose.connect(process.env.DB_CONECTION,{})
 .then(function (){
     console.log("connexion à la base de donnée établie")
 })
@@ -19,12 +19,12 @@ mongoose.connect(process.env.DB_TEST,{})
     mongoose.connect(process.env.DB_TEST,{})
 });
 
-const workerRoute = require('./routes/worker');
+const workerRoute = require('./routes/workerRoute');
 const posteRoute = require('./routes/PosteRout');
 const serviceRoute = require('./routes/serviceRout');
-const factureRoute = require('./routes/facture');
+const factureRoute = require('./routes/factureRoute');
 const customerRoute = require('./routes/customerRout');
-
+const contratRoute= require('./routes/contratRoute')
 
 //set Midllewares
 app.use(bodyParser.json());
@@ -37,6 +37,7 @@ app.use('/api/worker', workerRoute);
 app.use('/api/service', serviceRoute);
 app.use('/api/facture', factureRoute);
 app.use('/api/customer', customerRoute);
+app.use('/api/contrat',contratRoute);
 
 
 
