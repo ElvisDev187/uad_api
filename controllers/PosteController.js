@@ -66,8 +66,8 @@ exports.getById = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
-  Poste.deleteOne({ id_poste: req.params.postId })
+exports.delete =async (req, res) => {
+   await Poste.deleteOne({ id_poste: req.params.postId })
     .then((result) => {
       res.status(200).json({ message: "poste supprimer avec success" });
       console.log(result);
@@ -81,7 +81,7 @@ exports.delete = (req, res) => {
 
 exports.update =async (req, res) => {
   const poste = new Poste({
-    id_poste: req.body.id_poste,
+    id_poste: req.params.postId,
     nom_poste: req.body.nom_poste,
     salaire: req.body.salaire,
     grade: req.body.grade,
@@ -91,13 +91,13 @@ exports.update =async (req, res) => {
     return res.status(400).json(err.message);
   }
 
-  const postExist = await Poste.findOne({ id_poste: req.body.id_poste });
+  const postExist = await Poste.findOne({ id_poste: req.params.postId });
   if (!postExist) return res.status(400).json("Le poste n'existe pas");
 
   Poste.updateOne({ id_poste: req.params.postId }, { $set: poste })
     .then((result) => {
       res.status(200).json({ message: "Poste mis a jour" });
-      console.log(result);
+      
     })
     .catch((err) => {
       res
