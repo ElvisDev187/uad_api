@@ -16,7 +16,7 @@ routeur.post("/", controller.getSpecific)
 routeur.post("/register", controller.register);
 
 routeur.post("/login",controller.login)
-routeur.delete("/",controller.delete)
+routeur.delete("/:workerId",controller.delete)
 
 routeur.patch("/:workerId",controller.patch)
 
