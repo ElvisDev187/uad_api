@@ -21,6 +21,10 @@ const serviceSchema = mongoose.Schema({
     tarif_base:{
         type: Number,
         required: true
+    },
+    type:{
+        type: String,
+        required:true
     }
 
 });

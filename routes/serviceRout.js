@@ -4,7 +4,7 @@ const controller = require('../controllers/seviceController')
 
 router.get('/', controller.getAll);
 
-router.get('/:serviceId', controller.getById);
+router.post('/', controller.getSpecific);
 
 router.post('/register', controller.create);
 

@@ -7,7 +7,8 @@ exports.create = async (req, res)=>{
         id_service: req.body.id,
         libelle: req.body.libelle,
         description: req.body.description,
-        tarif_base:req.body.tarif
+        tarif_base:req.body.tarif,
+        type: req.body.type
     });
 
     const err = service.validateSync();
@@ -55,7 +56,8 @@ exports.update =  async(req, res)=>{
         id_service: req.params.serviceId,
         libelle: req.body.libelle,
         description: req.body.description,
-        tarif_base:req.body.tarif_base
+        tarif_base:req.body.tarif_base,
+        type: req.body.type
     });
     const err = uPoste.validateSync();
     if(err) return res.status(400).json(err.message);
@@ -72,10 +74,10 @@ exports.update =  async(req, res)=>{
 
 }
 
-exports.getById = async (req, res)=>{
+exports.getSpecific = async (req, res)=>{
 
     try {
-        const service = await MODELS.Service.findOne({id_service: req.params.serviceId});
+        const service = await MODELS.Service.find(req.body);
         res.status(200).json(service)
     } catch (error) {
         res.status(400).json({ message: "Une errur est survenue", error: error.message })
