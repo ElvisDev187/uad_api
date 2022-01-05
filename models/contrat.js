@@ -28,7 +28,7 @@ const contratSchema= mongoose.Schema({
         required:true
     },
     statut:{
-        type:string,
+        type:String,
         required:true
     }
 
