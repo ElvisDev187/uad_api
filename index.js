@@ -14,7 +14,6 @@ mongoose.connect(process.env.DB_CONECTION,{})
     console.log("connexion à la base de donnée établie")
 })
 .catch(e=>{
-    console.log("erreur de connexion :"+e )
     console.log("erreur de connexion :"+e + "on passe en local :" )
     mongoose.connect(process.env.DB_TEST,{})
 });
@@ -25,7 +24,8 @@ const serviceRoute = require('./routes/serviceRout');
 const factureRoute = require('./routes/factureRoute');
 const customerRoute = require('./routes/customerRout');
 const paymentRoute = require('./routes/paymentRout');
-const contratRoute= require('./routes/contratRoute')
+const contratRoute= require('./routes/contratRoute');
+const gererRoute=require('./routes/gererRoute');
 
 //set Midllewares
 app.use(bodyParser.json());
@@ -40,6 +40,7 @@ app.use('/api/facture', factureRoute);
 app.use('/api/customer', customerRoute);
 app.use('/api/payment', paymentRoute);
 app.use('/api/contrat',contratRoute);
+app.use('/api/gerer',gererRoute);
 
 
 

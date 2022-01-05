@@ -26,7 +26,12 @@ const contratSchema= mongoose.Schema({
     montant:{
         type:Number,
         required:true
+    },
+    statut:{
+        type:string,
+        required:true
     }
+
 })
 
 module.exports=mongoose.model("contrat",contratSchema);

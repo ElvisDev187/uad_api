@@ -38,6 +38,10 @@ const workerSchema=new mongoose.Schema({
     statut:{
         type:Boolean,
         required:true
+    },
+    date_embauche:{
+        type:Date,
+        default:Date.now()
     }
 
 });
