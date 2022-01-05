@@ -3,7 +3,7 @@ const controller=require("../controllers/gererController");
 
 
 
-router=express.Router()
+const router=express.Router()
 
 //routes
 

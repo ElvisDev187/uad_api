@@ -17,7 +17,7 @@ const postSchema = mongoose.Schema({
            min: 36776
        },
        grade:{
-           type: String,
+           type: Number,
            required: true
        }
 

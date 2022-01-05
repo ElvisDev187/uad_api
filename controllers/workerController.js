@@ -1,5 +1,6 @@
 const {MODELS}=require("../models/index");
 const workerModel= MODELS.worker
+const posteModel=MODELS.poste
 const bcrypt=require("bcryptjs");
 const jwt=require("jsonwebtoken");
 
@@ -44,9 +45,7 @@ exports.register=async (req,res)=>{
     const mdp= await bcrypt.hash(req.body.mdp,salt);
 
     worker.mdp = mdp;
-      
 
-       
         try{
             const savedUser=await worker.save();
             console.log("reussie")
@@ -60,7 +59,7 @@ exports.register=async (req,res)=>{
 exports.login=async (req,res)=>{
 
     const user = new MODELS.userLogin({
-        matricule: req.boqy.matricule,
+        matricule: req.body.matricule,
         mpd: req.body.mpd
     });
 
@@ -74,9 +73,12 @@ exports.login=async (req,res)=>{
     const mdp=await bcrypt.compare(req.body.mdp,this_worker.mdp);
      if(!mdp) return res.status(400).send("mot de passe incorrect");
      try{
-    const token=jwt.sign({_id:this_worker._id},process.env.TOKEN_KEY);
-    req.header("auth-token",token);
-    res.send(true)
+    const poste=await posteModel.findOne({id_poste:this_worker.id_poste});
+    const grade=poste.grade
+    const token=jwt.sign({id_worker:this_worker.id_worker,grade:grade  },
+                          process.env.TOKEN_KEY);
+    res.header("auth-token",token);
+    res.send(req.headers)
     }catch(e){
         console.log(e)
         res.status(400).send("erreur ,verifier votre connexion internet")

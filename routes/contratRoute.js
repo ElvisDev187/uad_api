@@ -3,7 +3,7 @@ const controller=require("../controllers/contratController");
 
 
 
-router=express.Router()
+ const router=express.Router()
 
 //routes
 
