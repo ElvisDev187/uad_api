@@ -7,13 +7,14 @@ const routeur=express.Router()
 
 //middlewares
 const verify=require("../middlewares/verify");
+const ACCESS=require("../middlewares/accessRoute");
 const permissions =require("..//middlewares/permissions")
 //requetes
-routeur.get('/',controller.getAll);
+routeur.get('/',[verify,ACCESS.facture],controller.getAll);
 
-routeur.post("/", controller.getSpecific)
+routeur.post("/",[verify,ACCESS.facture], controller.getSpecific)
 routeur.post("/register",[verify,permissions.facture], controller.create);
-routeur.delete("/",controller.delete)
+routeur.delete("/",[verify,ACCESS.facture],controller.delete)
 
 //exportation
 module.exports=routeur;

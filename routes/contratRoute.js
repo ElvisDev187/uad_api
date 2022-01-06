@@ -7,13 +7,14 @@ const controller=require("../controllers/contratController");
 
 //middlewares
 const verify=require("../middlewares/verify");
+const ACCESS=require("../middlewares/accessRoute");
 const permissions =require("..//middlewares/permissions")
 //requetes
-router.get('/',controller.getAll);
+router.get('/',[verify,ACCESS.contrat],controller.getAll);
 router.get('/:id_worker',controller.getByIdWorker)
-router.post("/", controller.getSpecific)
+router.post("/",[verify,ACCESS.contrat], controller.getSpecific)
 router.post("/register",[verify,permissions.contrat], controller.create);
-router.delete("/",controller.delete)
+router.delete("/",[verify,ACCESS.contrat],controller.delete)
 
 //exportation
 module.exports=router;

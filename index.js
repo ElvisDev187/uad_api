@@ -81,6 +81,7 @@ app.use('/api/gerer',gererRoute);
 app.get('/', (req, res)=>{
 if(!req.body.sta && req.body.mon ){
     console.log("oui");
+    
  }else{
     console.log("nonnn")
 }})

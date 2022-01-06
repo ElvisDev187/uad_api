@@ -2,7 +2,9 @@
 
 exports.facture=(req,res,next)=>{
     const grade=(req.worker.grade)%10;
-    if(grade!=parseInt(grade) && (grade%0.5)==0.25){
+    if(req.worker.grade && req.worker.grade>100){
+        next();
+    }else if(grade!=parseInt(grade) && (grade%0.5)==0.25){
         console.log(grade)
         next();
     }else{
@@ -16,6 +18,9 @@ exports.contrat=(req,res,next)=>{
 if(!req.body.statut && req.body.montant){
     //si la requete concernait la 2eme fonction de la table on laisse passé sans verification
      next();
+     //on verifie aussi si c'est le ROOT
+}else if(req.worker.grade && req.worker.grade>100){
+    next();
 }else{
     const grade=(req.worker.grade)%10;
     console.log(req.worker.grade)
