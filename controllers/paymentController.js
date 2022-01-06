@@ -1,7 +1,7 @@
 const {MODELS} = require('../models/index');
 
 exports.create = async(req, res) =>{ 
-  const payment = MODELS.payment(req.body);
+  const payment = new MODELS.payment(req.body);
 
   const err = payment.validateSync();
   if(err){ 
