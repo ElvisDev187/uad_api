@@ -78,7 +78,7 @@ exports.login=async (req,res)=>{
     const token=jwt.sign({id_worker:this_worker.id_worker,grade:grade  },
                           process.env.TOKEN_KEY);
     res.header("auth-token",token);
-    res.send(req.headers)
+    res.status(200).json(token)
     }catch(e){
         console.log(e)
         res.status(400).send("erreur ,verifier votre connexion internet")

@@ -3,7 +3,8 @@ const mongoose =require('mongoose');
 const factureSchema=mongoose.Schema({
     id_facture:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     id_client:{
         type:String,

@@ -4,11 +4,13 @@ const mongoose=require("mongoose");
 const contratSchema= mongoose.Schema({
     id_contrat:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     id_facture:{
         type:String,
-        required:true
+        required:true,
+        default:"false"
     },
     id_service:{
         type:String,
@@ -29,7 +31,8 @@ const contratSchema= mongoose.Schema({
     },
     statut:{
         type:String,
-        required:true
+        required:false,
+        default:"false"
     }
 
 })

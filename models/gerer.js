@@ -3,7 +3,8 @@ const mongoose=require('mongoose');
 const gererSchema=mongoose.Schema({
     id_assistant:{
         type:String,
-        required:true
+        required:true,
+        default:"false"
     },
     id_contrat:{
         type:String,
@@ -14,7 +15,9 @@ const gererSchema=mongoose.Schema({
         required:true
     },
     fonction:{
-        type:String
+        type:String,
+        required:true,
+        default:"Responsable de tout concernant ce contrat"
     }
 })
 

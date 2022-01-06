@@ -58,3 +58,25 @@ exports.delete=async (req,res)=>{
 
  }
  
+ exports.getByIdWorker=async (req, res)=>{
+    try{
+
+        //on va maintenant chercher les projets faits par cet employé
+        const gerers=await MODELS.gerer.find({id_chef:req.params.id_worker});
+        //on cree un tableau de contrat qui contiendra les contrats extrait des projets
+        let contrats=new Array();
+        //on inserre les contrats dans le tableau
+        for(gerer of gerers){
+            const item= await MODELS.contrat.findOne({id_contrat:gerer.id_contrat}) 
+            if(!contrats.includes(item)){
+                contrats.push(item)
+            }
+        }
+        res.send(contrats)
+    }catch(e){
+        console.log(e)
+        res.status(400).json("erreur:"+ e)
+    }
+}
+
+    

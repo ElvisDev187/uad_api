@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const postSchema = mongoose.Schema({
        id_poste :{
            type: String,
-           required: true
+           required: true,
+           unique:true
        },
        nom_poste:{
            type: String,

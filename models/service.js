@@ -5,7 +5,8 @@ const serviceSchema = mongoose.Schema({
 
     id_service:{
         type: Number,
-        required: true
+        required: true,
+        unique:true
     },
     libelle:{
         type: String,

@@ -6,6 +6,8 @@ const cors = require('cors');
 const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
+const a="4.5"
+
 
 //connection à la base de données
 mongoose.connect(process.env.DB_CONECTION,{})
@@ -76,7 +78,12 @@ app.use('/api/gerer',gererRoute);
 
 
 
-app.get('/', (req, res)=>{ res.status(200).json({message : "Bienvenu sur l'api UADGest"}) })
+app.get('/', (req, res)=>{
+if(!req.body.sta && req.body.mon ){
+    console.log("oui");
+ }else{
+    console.log("nonnn")
+}})
 
 //lancement
 app.listen(3000, ()=> console.log("server Start"));
