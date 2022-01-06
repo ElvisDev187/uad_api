@@ -36,3 +36,35 @@ exports.getSpecific = async (req, res)=>{
         res.status(400).json("erreur:"+ e)
     }
 }
+exports.getByIdWorker = async (req, res)=>{
+    try{
+        let clients=new Array();
+        //on extrait les factures ayant été faites par cet employé
+        const factures=await MODELS.facture.find({id_worker:req.params.id_worker});
+        //on va maintenant chercher les projets faits par cet employé
+        const gerers=await MODELS.gerer.find({id_chef:req.params.id_worker});
+        //on cree un tableau de contrat qui contiendra les contrats extrait des projets
+        let contrats=new Array();
+        //on inserre les contrats dans le tableau
+        for(gerer of gerers){
+            const item= await MODELS.contrat.findOne({id_contrat:gerer.id_contrat}) 
+            if(!contrats.includes(item)){
+                contrats.push(item)
+            }
+        }
+        //on mélange maintenant le tableau de factures à celui des contrats car les 2 ont id_client qui est ce quon veut
+        factures.map((item)=>contrats.push(item));
+        //on inserre maintenant les clients dans la tables clients en utilisant id_client 
+        for(contrat of contrats){
+            const item= await MODELS.customer.findOne({id_client:contrat.id_client})
+            if(!clients.includes(item)){
+                clients.push(item)
+            }
+        }
+        res.send(clients)
+     }catch(e){
+        console.log(e)
+        res.status(400).json("erreur:"+ e)
+    }
+}
+

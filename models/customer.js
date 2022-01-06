@@ -4,7 +4,8 @@ const  Mongoose  = require("mongoose");
 const schema = Mongoose.Schema({
     id_client :{
         type: String,
-        required: true
+        required: true,
+        unique:true
     },
     nom:{
         type: String,
@@ -15,9 +16,9 @@ const schema = Mongoose.Schema({
         required: true
     },
     tel:{
-        type: String,
-        min: 9,
-        max: 9
+        type: Number,
+        min: 600000000,
+        max: 699999999
     }
 
 });

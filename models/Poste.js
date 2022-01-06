@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const postSchema = mongoose.Schema({
        id_poste :{
            type: String,
-           required: true
+           required: true,
+           unique:true
        },
        nom_poste:{
            type: String,
@@ -17,7 +18,7 @@ const postSchema = mongoose.Schema({
            min: 36776
        },
        grade:{
-           type: String,
+           type: Number,
            required: true
        }
 

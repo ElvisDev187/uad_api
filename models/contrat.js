@@ -4,11 +4,13 @@ const mongoose=require("mongoose");
 const contratSchema= mongoose.Schema({
     id_contrat:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     id_facture:{
         type:String,
-        required:true
+        required:true,
+        default:"false"
     },
     id_service:{
         type:String,
@@ -26,7 +28,13 @@ const contratSchema= mongoose.Schema({
     montant:{
         type:Number,
         required:true
+    },
+    statut:{
+        type:String,
+        required:false,
+        default:"false"
     }
+
 })
 
 module.exports=mongoose.model("contrat",contratSchema);

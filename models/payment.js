@@ -4,7 +4,8 @@ const schema = mongoose.Schema({
 
     id_payment:{
         type:String,
-        required: true
+        required: true,
+        unique:true
     },
     versement:{
       type: Number,

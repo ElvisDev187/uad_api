@@ -3,22 +3,25 @@ const controller=require("../controllers/workerController");
 
 
 
+
 const routeur=express.Router()
 
 //routes
 
 //middlewares
-
+const verify=require("../middlewares/verify");
+const ACCESS=require("../middlewares/accessRoute");
 //requetes
-routeur.get('/',controller.getAll);
+routeur.get('/',[verify,ACCESS.worker],controller.getAll);
 
-routeur.post("/", controller.getSpecific)
+routeur.post("/",[verify,ACCESS.worker], controller.getSpecific)
+routeur.delete("/",[verify,ACCESS.worker],controller.delete)
+
+routeur.patch("/:workerId",[verify,ACCESS.worker],controller.patch)
 routeur.post("/register", controller.register);
 
 routeur.post("/login",controller.login)
-routeur.delete("/:workerId",controller.delete)
 
-routeur.patch("/:workerId",controller.patch)
 
 //exportation
 module.exports=routeur;

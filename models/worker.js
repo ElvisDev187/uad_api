@@ -4,7 +4,8 @@ const mongoose=require("mongoose");
 const workerSchema=new mongoose.Schema({
     id_worker :{
         type: String,
-        required: true
+        required: true,
+        unique:true
     },
     id_poste :{
         type: String,
@@ -22,12 +23,14 @@ const workerSchema=new mongoose.Schema({
     tel:{
         type:Number,
         required:true,
-        min:6,
+        min: 600000000,
+        max: 699999999
 
     },
     matricule:{
         type:String,
         required:true,
+        unique:true
     },
     mdp:{
         type:String,
@@ -37,7 +40,12 @@ const workerSchema=new mongoose.Schema({
     },
     statut:{
         type:Boolean,
-        required:true
+        required:true,
+        default:true
+    },
+    date_embauche:{
+        type:Date,
+        default:Date.now()
     }
 
 });
