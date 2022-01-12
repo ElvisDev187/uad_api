@@ -15,8 +15,8 @@ mongoose.connect(process.env.DB_CONECTION,{})
     console.log("connexion à la base de donnée établie")
 }) 
 .catch(e=>{
-    console.log("erreur de connexion :"+e + "on passe en local :" )
-    mongoose.connect(process.env.DB_TEST,{})
+    console.log("erreur de connexion :"+e + "\non passe en local :" )
+    mongoose.connect(process.env.DB_TEST,()=>{console.log("connexion locale reussi")})
 });
 
 const workerRoute = require('./routes/workerRoute');
@@ -72,19 +72,6 @@ app.use('/api/payment', paymentRoute);
 app.use('/api/contrat',contratRoute);
 app.use('/api/gerer',gererRoute);
 
-
-
-
-
-
-
-app.get('/', (req, res)=>{
-if(!req.body.sta && req.body.mon ){
-    console.log("oui");
-    
- }else{
-    console.log("nonnn")
-}})
 
 //lancement
 app.listen(3000, ()=> console.log("server Start"));
