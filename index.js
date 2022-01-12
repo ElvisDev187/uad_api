@@ -73,18 +73,5 @@ app.use('/api/contrat',contratRoute);
 app.use('/api/gerer',gererRoute);
 
 
-
-
-
-
-
-app.get('/', (req, res)=>{
-if(!req.body.sta && req.body.mon ){
-    console.log("oui");
-    
- }else{
-    console.log("nonnn")
-}})
-
 //lancement
 app.listen(3000, ()=> console.log("server Start"));

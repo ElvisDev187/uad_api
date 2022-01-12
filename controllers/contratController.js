@@ -8,7 +8,10 @@ exports.create=async (req,res)=>{
         id_client:req.body.id_client,
         libelle:req.body.libelle,
         montant:req.body.montant,
-        statut:req.body.statut
+        statut:req.body.statut,
+        quantite:req.body.quantite,
+        date_debut:req.body.date_debut,
+        date_fin:req.body.date_fin
     })
     const err= contrat.validateSync()
     if(err) return res.status(400).json(err.message)
