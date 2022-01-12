@@ -33,7 +33,10 @@ const contratSchema= mongoose.Schema({
         type:String,
         required:false,
         default:"false"
-    }
+    },
+    quantite:{type:Number},
+    date_debut:{type:Date},
+    date_fin:{type:Date}
 
 })
 
