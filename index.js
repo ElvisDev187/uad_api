@@ -10,13 +10,13 @@ const a="4.5"
 
 
 //connection à la base de données
-mongoose.connect(process.env.DB_CONECTION,{})
+mongoose.connect(process.env.DB_TEST,{})
 .then(function (){
     console.log("connexion à la base de donnée établie")
 }) 
 .catch(e=>{
     console.log("erreur de connexion :"+e + "on passe en local :" )
-    mongoose.connect(process.env.DB_TEST,{})
+    mongoose.connect(process.env.DB_TEST,()=>{console.log("connexion locale reussie");})
 });
 
 const workerRoute = require('./routes/workerRoute');

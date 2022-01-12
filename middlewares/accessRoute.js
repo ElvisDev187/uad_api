@@ -1,6 +1,8 @@
 
-exports.worker= (req,res,next)=>{
+exports.worker= async (req,res,next)=>{
+
     const grade=req.worker.grade
+
     if(grade>100){
         next();
     }else if((grade<17 && grade>10)||(grade<67 && grade>60)){

@@ -46,7 +46,7 @@ exports.getByIdWorker = async (req, res)=>{
         //on cree un tableau de contrat qui contiendra les contrats extrait des projets
         let contrats=new Array();
         //on inserre les contrats dans le tableau
-        for(gerer of gerers){
+        for(let gerer of gerers){
             const item= await MODELS.contrat.findOne({id_contrat:gerer.id_contrat}) 
             if(!contrats.includes(item)){
                 contrats.push(item)
@@ -55,7 +55,7 @@ exports.getByIdWorker = async (req, res)=>{
         //on mélange maintenant le tableau de factures à celui des contrats car les 2 ont id_client qui est ce quon veut
         factures.map((item)=>contrats.push(item));
         //on inserre maintenant les clients dans la tables clients en utilisant id_client 
-        for(contrat of contrats){
+        for(let contrat of contrats){
             const item= await MODELS.customer.findOne({id_client:contrat.id_client})
             if(!clients.includes(item)){
                 clients.push(item)

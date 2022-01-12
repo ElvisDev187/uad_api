@@ -73,9 +73,7 @@ exports.login=async (req,res)=>{
     const mdp=await bcrypt.compare(req.body.mdp,this_worker.mdp);
      if(!mdp) return res.status(400).send("mot de passe incorrect");
      try{
-    const poste=await posteModel.findOne({id_poste:this_worker.id_poste});
-    const grade=poste.grade
-    const token=jwt.sign({id_worker:this_worker.id_worker,grade:grade  },
+    const token=jwt.sign({id_worker:this_worker.id_worker,id_poste: this_worker.id_poste },
                           process.env.TOKEN_KEY);
     res.header("auth-token",token);
     res.status(200).json(token)
